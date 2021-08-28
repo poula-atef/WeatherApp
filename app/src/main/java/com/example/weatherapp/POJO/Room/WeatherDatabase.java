@@ -1,4 +1,4 @@
-package com.example.weatherapp.Room;
+package com.example.weatherapp.POJO.Room;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.weatherapp.Classes.Forecast;
+import com.example.weatherapp.POJO.Classes.Forecast;
 
 @Database(entities = {Forecast.class},version = 1)
 public abstract class WeatherDatabase extends RoomDatabase {

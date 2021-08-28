@@ -1,4 +1,4 @@
-package com.example.weatherapp.Room;
+package com.example.weatherapp.POJO.Room;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
@@ -6,7 +6,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.weatherapp.Classes.Forecast;
+import com.example.weatherapp.POJO.Classes.Forecast;
 
 import java.util.List;
 

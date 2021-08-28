@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherApp">
         <receiver
-            android:name=".WeatherWidget"
+            android:name=".UI.WeatherWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -26,11 +26,11 @@
                 android:resource="@xml/weather_widget_info" />
         </receiver>
 
-        <receiver android:name=".WeatherBroadCastReceiver" android:exported="false"/>
-        <service android:name=".WeatherService" android:exported="false"/>
+        <receiver android:name=".POJO.WeatherBroadCastReceiver" android:exported="false"/>
+        <service android:name=".POJO.WeatherService" android:exported="false"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

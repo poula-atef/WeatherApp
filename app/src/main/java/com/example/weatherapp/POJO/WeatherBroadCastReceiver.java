@@ -1,12 +1,8 @@
-package com.example.weatherapp;
+package com.example.weatherapp.POJO;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-import com.example.weatherapp.Room.WeatherDatabase;
-
-import java.util.Observable;
 
 public class WeatherBroadCastReceiver extends BroadcastReceiver {
 

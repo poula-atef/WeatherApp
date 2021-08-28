@@ -1,14 +1,13 @@
-package com.example.weatherapp.MVVM;
+package com.example.weatherapp.POJO.MVVM;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.weatherapp.Classes.ForecastRoot;
-import com.example.weatherapp.Classes.GeocoderRoot;
+import com.example.weatherapp.POJO.Classes.ForecastRoot;
+import com.example.weatherapp.POJO.Classes.GeocoderRoot;
 
 import retrofit2.Call;
 import retrofit2.Callback;

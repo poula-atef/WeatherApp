@@ -1,4 +1,4 @@
-package com.example.weatherapp;
+package com.example.weatherapp.UI;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -8,16 +8,15 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Build;
 import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.weatherapp.Classes.Forecast;
-
-import java.util.Calendar;
+import com.example.weatherapp.POJO.Classes.Forecast;
+import com.example.weatherapp.R;
+import com.example.weatherapp.POJO.WeatherBroadCastReceiver;
+import com.example.weatherapp.POJO.Utils.WeatherUtils;
 
 /**
  * Implementation of App Widget functionality.
@@ -62,7 +61,7 @@ public class WeatherWidget extends AppWidgetProvider {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.S)
-    static void updateAppWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, Forecast forecast) {
+    public static void updateAppWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, Forecast forecast) {
 
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId, forecast);

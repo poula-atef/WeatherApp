@@ -1,14 +1,13 @@
-package com.example.weatherapp;
+package com.example.weatherapp.POJO.Utils;
 
 import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
-import com.example.weatherapp.Classes.Forecast;
+import com.example.weatherapp.POJO.Classes.Forecast;
+import com.example.weatherapp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

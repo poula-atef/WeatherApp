@@ -1,7 +1,7 @@
-package com.example.weatherapp.MVVM;
+package com.example.weatherapp.POJO.MVVM;
 
-import com.example.weatherapp.Classes.ForecastRoot;
-import com.example.weatherapp.Classes.GeocoderRoot;
+import com.example.weatherapp.POJO.Classes.ForecastRoot;
+import com.example.weatherapp.POJO.Classes.GeocoderRoot;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

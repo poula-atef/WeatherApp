@@ -1,4 +1,4 @@
-package com.example.weatherapp;
+package com.example.weatherapp.POJO;
 
 import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
@@ -6,13 +6,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.example.weatherapp.Classes.Forecast;
-import com.example.weatherapp.Room.WeatherDatabase;
+import com.example.weatherapp.POJO.Classes.Forecast;
+import com.example.weatherapp.POJO.Room.WeatherDatabase;
+import com.example.weatherapp.POJO.Utils.WeatherUtils;
+import com.example.weatherapp.UI.WeatherWidget;
 
 import java.util.Calendar;
 import java.util.List;
@@ -21,7 +22,6 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableEmitter;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 

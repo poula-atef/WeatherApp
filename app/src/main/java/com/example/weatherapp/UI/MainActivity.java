@@ -1,8 +1,7 @@
-package com.example.weatherapp;
+package com.example.weatherapp.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,20 +19,19 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.weatherapp.Classes.Datum;
-import com.example.weatherapp.Classes.Forecast;
-import com.example.weatherapp.Classes.ForecastRoot;
-import com.example.weatherapp.Classes.GeocoderRoot;
-import com.example.weatherapp.MVVM.WeatherViewModel;
-import com.example.weatherapp.Room.WeatherDatabase;
+import com.example.weatherapp.POJO.Classes.Datum;
+import com.example.weatherapp.POJO.Classes.Forecast;
+import com.example.weatherapp.POJO.Classes.ForecastRoot;
+import com.example.weatherapp.POJO.Classes.GeocoderRoot;
+import com.example.weatherapp.POJO.HoursAdapter;
+import com.example.weatherapp.POJO.MVVM.WeatherViewModel;
+import com.example.weatherapp.POJO.Room.WeatherDatabase;
+import com.example.weatherapp.POJO.Utils.WeatherUtils;
 import com.example.weatherapp.databinding.ActivityMainBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import java.util.Calendar;
 import java.util.List;
@@ -58,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        double lat = 30.09877142021398, lng = 31.252283673661616;
-
-        String query = lat + "," + lng;
 
         getWeatherData();
 

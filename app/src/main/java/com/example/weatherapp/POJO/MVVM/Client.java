@@ -1,4 +1,4 @@
-package com.example.weatherapp.MVVM;
+package com.example.weatherapp.POJO.MVVM;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
