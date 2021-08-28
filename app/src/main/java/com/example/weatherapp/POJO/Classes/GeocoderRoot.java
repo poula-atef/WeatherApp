@@ -1,4 +1,4 @@
-package com.example.weatherapp.Classes;
+package com.example.weatherapp.POJO.Classes;
 
 import java.util.List;
 

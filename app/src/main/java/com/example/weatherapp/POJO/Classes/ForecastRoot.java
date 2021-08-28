@@ -1,4 +1,5 @@
-package com.example.weatherapp.Classes;
+package com.example.weatherapp.POJO.Classes;
+
 
 public class ForecastRoot {
     private String message;

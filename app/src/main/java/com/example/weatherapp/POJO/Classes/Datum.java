@@ -1,4 +1,4 @@
-package com.example.weatherapp.Classes;
+package com.example.weatherapp.POJO.Classes;
 
 public class Datum {
     private double latitude;
