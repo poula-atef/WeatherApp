@@ -2,6 +2,7 @@ package com.example.weatherapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,8 @@ import java.util.List;
 
 public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.HoursViewHolder> {
 
-    private List<Boolean> selected;
     private List<Forecast> forecast;
     private Context context;
-    private static final String TAG = "tag";
 
 
     @NonNull
@@ -52,6 +51,7 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.HoursViewHol
 
         holder.icon.setImageDrawable(context.getDrawable(WeatherUtils.chooseWeatherIcon(forecast.get(position).getIcon())));
 
+        holder.itemView.setBackgroundTintList(ColorStateList.valueOf(WeatherUtils.chooseColorBasedOnTime(WeatherUtils.convertUnixToUTC(forecast.get(position).getTime()).getHours())));
 
     }
 
@@ -64,15 +64,9 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.HoursViewHol
 
     public void setForecast(List<Forecast> forecast) {
         this.forecast = forecast;
-        selected = new ArrayList<>();
-        for (int i = 0; i < forecast.size(); i++){
-            selected.add(false);
-        }
-
-
     }
 
-    public class HoursViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class HoursViewHolder extends RecyclerView.ViewHolder {
         TextView weather, time;
         ImageView icon;
 
@@ -81,27 +75,8 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.HoursViewHol
             weather = itemView.findViewById(R.id.weather);
             time = itemView.findViewById(R.id.time);
             icon = itemView.findViewById(R.id.icon);
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            int position = getAdapterPosition();
-            if (selected.get(position)) {
-                selected.set(position, false);
-                itemView.setBackground(context.getDrawable(R.drawable.item_back));
-                for (int i = 0; i < forecast.size(); i++)
-                    if (i != position)
-                        selected.set(i, false);
-                notifyDataSetChanged();
-            } else {
-                selected.set(position, true);
-                itemView.setBackground(context.getDrawable(R.drawable.item_back_selected));
-                for (int i = 0; i < forecast.size(); i++)
-                    if (i != position)
-                        selected.set(i, false);
-                notifyDataSetChanged();
-            }
-        }
+
     }
 }

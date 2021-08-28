@@ -10,7 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -25,6 +29,7 @@ import com.example.weatherapp.Room.WeatherDatabase;
 import com.example.weatherapp.databinding.ActivityMainBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     getCurrentPlaceName(location.getLatitude() + "," + location.getLongitude());
                     getWeatherDataFromApi(location.getLatitude(), location.getLongitude());
                 } else {
+                    getLocation();
                     Toast.makeText(MainActivity.this, "Can't find your location now, please try again later !!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -208,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 binding.wind.setText((int) data.getWindSpeed() + " km/h");
                 binding.humidity.setText((int) (data.getHumidity() * 100) + "%");
                 binding.rain.setText((int) (data.getPrecipProbability() * 100) + "%");
+                binding.container.setBackgroundTintList(ColorStateList.valueOf(WeatherUtils.chooseColorBasedOnTime(WeatherUtils.convertUnixToUTC(data.getTime()).getHours())));
             }
         }).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
     }
@@ -222,4 +229,49 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "You should grant this permissions !!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void getLocation() {
+        Geocoder coder = new Geocoder(getApplicationContext());
+        List<Address> address;
+        Location loc = null;
+        try {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+                Log.d(TAG, "No Address!!!!!!!!!!!!!!!!");
+                return;
+            }
+            LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            List<String> provs = manager.getProviders(true);
+            for (int i = 0; i < provs.size(); i++) {
+                Log.d(TAG, "Address is : " + provs.get(i));
+
+                loc = manager.getLastKnownLocation(provs.get(i));
+                if (loc != null)
+                    break;
+            }
+        } catch (Exception e) {
+//            Log.d(TAG, "No Address!!!!!!!!!!!!!!!!");
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        if (loc != null) {
+            LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+            Toast.makeText(MainActivity.this, "lat is " + loc.getLatitude() + ", and " + latLng.latitude, Toast.LENGTH_SHORT).show();
+            try {
+                address = coder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                if (address != null) {
+                    String addrs = address.get(0).getAddressLine(0);
+                    Log.d(TAG, "Address is : " + addrs);
+                }
+            } catch (Exception e) {
+                Log.d(TAG, "No Address!!!!!!!!!!!!!!!!");
+                e.printStackTrace();
+            }
+        } else {
+            Log.d(TAG, "loc is null!!!!!!!!!!!!!!!");
+        }
+    }
+
+
 }

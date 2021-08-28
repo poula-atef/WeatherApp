@@ -1,0 +1,39 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.WeatherApp.AppWidget.Container"
+    android:id="@+id/widget_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#00b0ff"
+    android:theme="@style/Theme.WeatherApp.AppWidgetContainer">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/_85sdp"
+            android:layout_height="@dimen/_85sdp"
+            android:src="@drawable/sun"
+            android:layout_margin="@dimen/_12sdp"
+            />
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/appwidget_text"
+            android:textSize="@dimen/_23ssp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            android:alpha="0.8"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+</LinearLayout>

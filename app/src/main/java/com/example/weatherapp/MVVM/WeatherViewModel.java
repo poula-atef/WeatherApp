@@ -19,8 +19,7 @@ public class WeatherViewModel extends AndroidViewModel {
     private MutableLiveData<ForecastRoot> weatherLiveData;
     private MutableLiveData<GeocoderRoot> geocoderLiveData;
 
-    private static final String TAG = "tag";
-    
+
     public WeatherViewModel(@NonNull Application application) {
         super(application);
         geocoderLiveData = new MutableLiveData<>();
@@ -37,7 +36,6 @@ public class WeatherViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<ForecastRoot> call, Response<ForecastRoot> response) {
                 weatherLiveData.setValue(response.body());
-                Log.d(TAG, "response size is = " + response.body().getData().getForecast().size());
             }
 
             @Override

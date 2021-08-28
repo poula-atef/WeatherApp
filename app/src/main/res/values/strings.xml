@@ -4,4 +4,8 @@
     <string name="rain">Rain</string>
     <string name="humidity">Humidity</string>
     <string name="today">Today</string>
+    <string name="appwidget_text">32°</string>
+    <string name="time">Monday, 15 May</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>

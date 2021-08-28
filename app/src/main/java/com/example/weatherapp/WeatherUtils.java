@@ -1,6 +1,11 @@
 package com.example.weatherapp;
 
+import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Color;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.weatherapp.Classes.Forecast;
@@ -14,7 +19,6 @@ import java.util.Locale;
 
 public class WeatherUtils {
 
-    private static final String TAG = "tag";
 
     @SuppressLint("SimpleDateFormat")
     public static Date convertUnixToUTC(long unixSeconds) {
@@ -72,6 +76,38 @@ public class WeatherUtils {
         return forecasts.get(forecasts.size() - 1);
     }
 
+    public static int chooseColorBasedOnTime(float hour) {
+
+        if (hour < 12) {
+            hour = 12 - hour;
+        } else {
+            hour -= 12;
+        }
+        hour *= 8;
+        hour /= 100;
+        int start = 0x00b0ff, end = 0x05001b;
+        StringBuilder color = new StringBuilder(new StringBuilder(Integer.toHexString((Integer) new ArgbEvaluator().evaluate(hour, start, end))));
+        while (color.length() < 6) {
+            color.insert(0, '0');
+        }
+        return Color.parseColor("#" + color);
+    }
 
 
+    public static long getFirstUpdateTime(){
+        long curr = WeatherUtils.convertUnixToUTC(Calendar.getInstance().getTime().getTime()).getTime();
+        long updateTime = ((curr - (curr % 3600000)) + 3600000) - curr;
+        return updateTime;
+    }
+
+    public static long getUpdateTime(Context context) {
+        boolean first = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("first",true);
+        if(first){
+            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("first",false).apply();
+            return getFirstUpdateTime();
+        }
+        else{
+            return 3600000;
+        }
+    }
 }
