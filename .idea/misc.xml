@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/clouds.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/cloudy_moon.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/cloudy_sun.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/ic_sunshine.xml" value="0.20625" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/item_back.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/item_back_selected.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/moon.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/rain.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/rains.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/rec_hours_selector.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/sun.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/weather_blue_back.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/drawable/weather_dark_shape.xml" value="0.2203125" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/hourly_weather_item.xml" value="0.67" />
+        <entry key="..\:/Users/PoulaAtef/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/hourly_weather_item_selected.xml" value="0.20416666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

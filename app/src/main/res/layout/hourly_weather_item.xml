@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="@dimen/_50sdp"
+    android:layout_height="@dimen/_75sdp"
+    android:background="@drawable/item_back"
+    android:layout_marginHorizontal="@dimen/_5sdp"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21°"
+        android:textColor="#fff"
+        android:textSize="@dimen/_10sdp"
+        />
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:src="@drawable/sun"
+        />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11:00 am"
+        android:textColor="#fff"
+        android:alpha="0.8"
+        android:textSize="@dimen/_7sdp"
+        />
+
+</LinearLayout>
