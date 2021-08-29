@@ -26,16 +26,16 @@ public class WeatherWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
-        Intent intent = new Intent(context, WeatherBroadCastReceiver.class);
-        PendingIntent pendingIntentAlarm = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         long updateTime = WeatherUtils.getUpdateTime(context);
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,
-                updateTime,
-                pendingIntentAlarm);
-
+        if(updateTime > 0) {
+            Intent intent = new Intent(context, WeatherBroadCastReceiver.class);
+            PendingIntent pendingIntentAlarm = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
+            alarmManager.cancel(pendingIntentAlarm);
+            alarmManager.set(AlarmManager.RTC_WAKEUP,
+                    updateTime,
+                    pendingIntentAlarm);
+        }
 
     }
 

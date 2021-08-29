@@ -19,6 +19,9 @@ import java.util.Locale;
 public class WeatherUtils {
 
 
+    /**
+     * convertUnixToUTC converts time from milliseconds to date
+    **/
     @SuppressLint("SimpleDateFormat")
     public static Date convertUnixToUTC(long unixSeconds) {
         Date date = new java.util.Date(unixSeconds * 1000L);
@@ -29,15 +32,24 @@ public class WeatherUtils {
         return new Date(Integer.parseInt(arr[0]) - 1900, Integer.parseInt(arr[1]) - 1, Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), Integer.parseInt(arr[4]));
     }
 
+
+
     public static int fahrenheitToCelsius(double deg) {
         return (int) ((deg - 32) * 5 / 9);
     }
+
+
 
     public static String getDateFormat(Date date) {
         SimpleDateFormat df = new SimpleDateFormat("EEEE, dd MMMM", Locale.getDefault());
         return df.format(date);
     }
 
+
+
+    /**
+     * getNowForecast returns the forecast of today only (has the same date)
+     **/
     public static List<Forecast> getTodaysWeather(List<Forecast> forecast) {
         List<Forecast> tmp = new ArrayList<>();
         Date date = Calendar.getInstance().getTime();
@@ -49,6 +61,7 @@ public class WeatherUtils {
         }
         return tmp;
     }
+
 
     public static int chooseWeatherIcon(String iconName) {
         if (iconName.contains("day")) {
@@ -67,6 +80,11 @@ public class WeatherUtils {
         return R.drawable.clouds;
     }
 
+
+
+    /**
+     * getNowForecast returns the forecast of the right hour we belong to now
+    **/
     public static Forecast getNowForecast(List<Forecast> forecasts, Date date) {
         for (int i = 1; i < forecasts.size(); i++) {
             if (date.getTime() < WeatherUtils.convertUnixToUTC(forecasts.get(i).getTime()).getTime())
@@ -75,6 +93,11 @@ public class WeatherUtils {
         return forecasts.get(forecasts.size() - 1);
     }
 
+
+    /**
+     * chooseColorBasedOnTime function returns color tone based on the time now between light blue (day light color)
+     * and very dark blue (night color)
+    **/
     public static int chooseColorBasedOnTime(float hour) {
 
         if (hour < 12) {
@@ -93,12 +116,26 @@ public class WeatherUtils {
     }
 
 
+
+    /**
+     * getFirstUpdateTime returns the difference between the current time and the next hour
+     * EX:
+     * ---
+     *      if now 8:25 it returns diff between 8:25 and 9:00, so returns 00:35 in milliseconds
+    **/
     public static long getFirstUpdateTime(){
         long curr = WeatherUtils.convertUnixToUTC(Calendar.getInstance().getTime().getTime()).getTime();
         long updateTime = ((curr - (curr % 3600000)) + 3600000) - curr;
         return updateTime;
     }
 
+
+
+    /**
+     *  getUpdateTime returns the time used to update the widget as it for first time returns specific period
+     *  to match the current time, the second time returns 3600,000 which is an hour in milliseconds,
+     *  then returns 0 for any other attempts
+    **/
     public static long getUpdateTime(Context context) {
         boolean first = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("first",true);
         if(first){
@@ -106,7 +143,10 @@ public class WeatherUtils {
             return getFirstUpdateTime();
         }
         else{
-            return 3600000;
+            long ret = PreferenceManager.getDefaultSharedPreferences(context).getLong("firstVal",3600000);
+            if(ret != 0)
+                PreferenceManager.getDefaultSharedPreferences(context).edit().putLong("firstVal",0).apply();
+            return ret;
         }
     }
 }

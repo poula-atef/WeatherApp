@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    private static final String TAG = "tag";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * getCurrentLocation use FusedLocationProviderClient to get current location longitude and latitude
+     * then use it to get get current place name using Position Stack Api and get weather data from
+     * Ambee Api or Room DB
+     */
     private void getCurrentLocation() {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -92,13 +95,18 @@ public class MainActivity extends AppCompatActivity {
                     getCurrentPlaceName(location.getLatitude() + "," + location.getLongitude());
                     getWeatherDataFromApi(location.getLatitude(), location.getLongitude());
                 } else {
-                    getLocation();
                     Toast.makeText(MainActivity.this, "Can't find your location now, please try again later !!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
+
+    /**
+     * getWeatherData on the upstream we see if the data we cache in Room DB is up to date or not,
+     * if it has the data of today we use it directly otherwise we clear the DB and request the data
+     * from Ambee Api and cache it in the DB
+     */
     private void getWeatherData() {
         WeatherDatabase db = WeatherDatabase.getInstance(MainActivity.this);
         Observable.create(new ObservableOnSubscribe<Boolean>() {
@@ -221,49 +229,6 @@ public class MainActivity extends AppCompatActivity {
             getCurrentLocation();
         } else {
             Toast.makeText(MainActivity.this, "You should grant this permissions !!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void getLocation() {
-        Geocoder coder = new Geocoder(getApplicationContext());
-        List<Address> address;
-        Location loc = null;
-        try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
-                Log.d(TAG, "No Address!!!!!!!!!!!!!!!!");
-                return;
-            }
-            LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
-            List<String> provs = manager.getProviders(true);
-            for (int i = 0; i < provs.size(); i++) {
-                Log.d(TAG, "Address is : " + provs.get(i));
-
-                loc = manager.getLastKnownLocation(provs.get(i));
-                if (loc != null)
-                    break;
-            }
-        } catch (Exception e) {
-//            Log.d(TAG, "No Address!!!!!!!!!!!!!!!!");
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        if (loc != null) {
-            LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
-            Toast.makeText(MainActivity.this, "lat is " + loc.getLatitude() + ", and " + latLng.latitude, Toast.LENGTH_SHORT).show();
-            try {
-                address = coder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                if (address != null) {
-                    String addrs = address.get(0).getAddressLine(0);
-                    Log.d(TAG, "Address is : " + addrs);
-                }
-            } catch (Exception e) {
-                Log.d(TAG, "No Address!!!!!!!!!!!!!!!!");
-                e.printStackTrace();
-            }
-        } else {
-            Log.d(TAG, "loc is null!!!!!!!!!!!!!!!");
         }
     }
 
